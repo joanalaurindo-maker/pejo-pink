@@ -1,111 +1,774 @@
-:root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pejo Pink - Studio & Makeup Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pink-main: #ff2b85;
+            --pink-deep: #d8005f;
+            --pink-soft: #ffe8f2;
+            --pink-glow: rgba(255, 43, 133, 0.4);
+            --bg-dark: #120309;
+            --bg-card: #1f0813;
+            --bg-card-hover: #2d0d1d;
+            --text-main: #ffffff;
+            --text-sub: #ffb8d7;
+            --border-pink: #ff529d;
+            --gold-accent: #ffd700;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+            /* Touch & Target sizing variables */
+            --btn-height: 60px;
+            --btn-font-size: 1.1rem;
+            --btn-padding: 0 28px;
+            --radius-main: 16px;
+        }
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+        /* Accessibility touch sizes */
+        body[data-touch-size="large"] {
+            --btn-height: 72px;
+            --btn-font-size: 1.25rem;
+            --btn-padding: 0 36px;
+        }
 
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
-}
+        body[data-touch-size="mega"] {
+            --btn-height: 84px;
+            --btn-font-size: 1.4rem;
+            --btn-padding: 0 44px;
+        }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
 
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
-}
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
 
-body {
-  margin: 0;
-}
+        /* Global High-Target Accessible Button Base */
+        .btn-touch {
+            min-height: var(--btn-height);
+            font-size: var(--btn-font-size);
+            padding: var(--btn-padding);
+            border-radius: var(--radius-main);
+            border: 2px solid var(--border-pink);
+            background: linear-gradient(135deg, var(--pink-main), var(--pink-deep));
+            color: #ffffff;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 6px 20px var(--pink-glow);
+            user-select: none;
+            text-decoration: none;
+            width: auto;
+        }
 
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-}
+        .btn-touch:hover, .btn-touch:focus-visible {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(255, 43, 133, 0.7);
+            border-color: #ffffff;
+            outline: 3px solid var(--gold-accent);
+            outline-offset: 3px;
+        }
 
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
-}
+        .btn-touch:active {
+            transform: translateY(1px) scale(0.98);
+        }
 
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
-p {
-  margin: 0;
-}
+        .btn-outline {
+            background: rgba(255, 43, 133, 0.1);
+            color: var(--text-sub);
+        }
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
-}
+        .btn-outline:hover {
+            background: var(--pink-main);
+            color: #fff;
+        }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
-}
+        /* Top Bar & Header */
+        header {
+            background: rgba(31, 8, 19, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 2px solid rgba(255, 43, 133, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 16px 24px;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: #ffffff;
+            text-shadow: 0 0 12px var(--pink-main);
+        }
+
+        .logo span {
+            color: var(--pink-main);
+            font-style: italic;
+        }
+
+        /* Accessibility Toolbar */
+        .access-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 6px 12px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .access-label {
+            font-size: 0.85rem;
+            color: var(--text-sub);
+            font-weight: 600;
+            margin-right: 4px;
+        }
+
+        .size-btn {
+            background: transparent;
+            border: 1px solid var(--border-pink);
+            color: var(--text-sub);
+            padding: 6px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 700;
+            transition: 0.2s;
+        }
+
+        .size-btn.active, .size-btn:hover {
+            background: var(--pink-main);
+            color: #fff;
+        }
+
+        /* Main Navigation Tabs */
+        nav.main-tabs {
+            max-width: 1400px;
+            margin: 20px auto 0;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+        }
+
+        .nav-tab-btn {
+            min-height: calc(var(--btn-height) + 8px);
+            font-size: var(--btn-font-size);
+            border-radius: var(--radius-main);
+            border: 2px solid rgba(255, 43, 133, 0.3);
+            background: var(--bg-card);
+            color: var(--text-sub);
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: all 0.2s;
+        }
+
+        .nav-tab-btn.active, .nav-tab-btn:hover {
+            background: linear-gradient(135deg, var(--pink-main), var(--pink-deep));
+            color: #ffffff;
+            border-color: #ffffff;
+            box-shadow: 0 8px 25px var(--pink-glow);
+        }
+
+        /* Container Sections */
+        main {
+            max-width: 1400px;
+            margin: 30px auto;
+            padding: 0 24px;
+            flex: 1;
+            width: 100%;
+        }
+
+        .tab-section {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out forwards;
+        }
+
+        .tab-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Banner Info */
+        .pink-banner {
+            background: linear-gradient(135deg, rgba(255, 43, 133, 0.2), rgba(31, 8, 19, 0.8));
+            border: 2px solid var(--border-pink);
+            border-radius: 24px;
+            padding: 32px;
+            margin-bottom: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .pink-banner h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .pink-banner p {
+            color: var(--text-sub);
+            font-size: 1.1rem;
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .product-card {
+            background: var(--bg-card);
+            border: 2px solid rgba(255, 43, 133, 0.2);
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .product-card:hover {
+            border-color: var(--pink-main);
+            transform: translateY(-5px);
+            background: var(--bg-card-hover);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 200px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            margin-bottom: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .product-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--pink-main);
+            margin-bottom: 16px;
+        }
+
+        /* Virtual Try-On Studio */
+        .tryon-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            background: var(--bg-card);
+            padding: 32px;
+            border-radius: 24px;
+            border: 2px solid var(--border-pink);
+        }
+
+        @media (max-width: 900px) {
+            .tryon-container { grid-template-columns: 1fr; }
+        }
+
+        .face-preview-box {
+            background: #120309;
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 1px dashed var(--pink-main);
+            min-height: 380px;
+        }
+
+        .face-svg {
+            width: 220px;
+            height: 260px;
+        }
+
+        .controls-group {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .color-picker-title {
+            font-weight: 700;
+            color: var(--text-sub);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .color-palette {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .color-dot {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .color-dot:hover, .color-dot.selected {
+            transform: scale(1.15);
+            border-color: #ffffff;
+            box-shadow: 0 0 12px currentColor;
+        }
+
+        /* Cart Drawer */
+        .cart-btn-fixed {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 99;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+        }
+
+        .badge {
+            background: var(--gold-accent);
+            color: #000;
+            font-weight: 800;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+        }
+
+        /* Floating Modal Cart */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(8px);
+            z-index: 200;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            border: 2px solid var(--border-pink);
+            border-radius: 24px;
+            width: 100%;
+            max-width: 600px;
+            padding: 32px;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 12px;
+            margin-bottom: 12px;
+        }
+
+        /* Booking Form */
+        .booking-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            background: var(--bg-card);
+            padding: 32px;
+            border-radius: 24px;
+            border: 2px solid var(--border-pink);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-weight: 700;
+            color: var(--text-sub);
+        }
+
+        .form-input {
+            min-height: 56px;
+            background: rgba(0,0,0,0.4);
+            border: 2px solid rgba(255,43,133,0.3);
+            border-radius: 12px;
+            padding: 0 16px;
+            color: #fff;
+            font-size: 1.1rem;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--pink-main);
+            box-shadow: 0 0 10px var(--pink-glow);
+        }
+    </style>
+</head>
+<body data-touch-size="normal">
+
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                💄 Pejo <span>Pink</span>
+            </div>
+
+            <!-- Accessibility Touch Targets Controller -->
+            <div class="access-bar">
+                <span class="access-label">🎯 Tamanho dos Botões:</span>
+                <button class="size-btn active" onclick="setTouchSize('normal')">Padrão</button>
+                <button class="size-btn" onclick="setTouchSize('large')">Grande</button>
+                <button class="size-btn" onclick="setTouchSize('mega')">Mega (Fácil Acesso)</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="main-tabs">
+        <button class="nav-tab-btn active" onclick="switchTab('store')">
+            🛍️ Loja de Make
+        </button>
+        <button class="nav-tab-btn" onclick="switchTab('tryon')">
+            ✨ Provador Virtual
+        </button>
+        <button class="nav-tab-btn" onclick="switchTab('booking')">
+            📅 Agendar & Cursos
+        </button>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- TAB 1: LOJA DE MAKE -->
+        <section id="tab-store" class="tab-section active">
+            <div class="pink-banner">
+                <div>
+                    <h1>Coleção de Maquiagem Pejo Pink</h1>
+                    <p>Clique facil e prático nos produtos com botões super dimensionados!</p>
+                </div>
+            </div>
+
+            <div class="products-grid">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <div class="product-img">💋</div>
+                    <div class="product-title">Batom Pejo Matte Neon</div>
+                    <div class="product-price">R$ 49,90</div>
+                    <button class="btn-touch" onclick="addToCart('Batom Pejo Matte Neon', 49.90)">
+                        🛒 Adicionar ao Carrinho
+                    </button>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <div class="product-img">✨</div>
+                    <div class="product-title">Gloss Labial Pejo Shine</div>
+                    <div class="product-price">R$ 39,90</div>
+                    <button class="btn-touch" onclick="addToCart('Gloss Labial Pejo Shine', 39.90)">
+                        🛒 Adicionar ao Carrinho
+                    </button>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <div class="product-img">🎨</div>
+                    <div class="product-title">Paleta de Sombras Pink Dream</div>
+                    <div class="product-price">R$ 119,90</div>
+                    <button class="btn-touch" onclick="addToCart('Paleta Pink Dream', 119.90)">
+                        🛒 Adicionar ao Carrinho
+                    </button>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="product-card">
+                    <div class="product-img">🌸</div>
+                    <div class="product-title">Blush Rosado Glow Pejo</div>
+                    <div class="product-price">R$ 59,90</div>
+                    <button class="btn-touch" onclick="addToCart('Blush Rosado Glow', 59.90)">
+                        🛒 Adicionar ao Carrinho
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: PROVADOR VIRTUAL -->
+        <section id="tab-tryon" class="tab-section">
+            <div class="pink-banner">
+                <div>
+                    <h1>Provador Virtual de Make</h1>
+                    <p>Experimente tons de batom e blush em tempo real antes de comprar!</p>
+                </div>
+            </div>
+
+            <div class="tryon-container">
+                <div class="face-preview-box">
+                    <svg class="face-svg" viewBox="0 0 200 240">
+                        <!-- Rosto -->
+                        <path d="M 40 80 C 40 180, 160 180, 160 80 C 160 30, 40 30, 40 80 Z" fill="#ffe0bd" stroke="#d4a373" stroke-width="2"/>
+                        <!-- Olhos -->
+                        <ellipse cx="75" cy="85" rx="12" ry="6" fill="#fff" />
+                        <ellipse cx="125" cy="85" rx="12" ry="6" fill="#fff" />
+                        <circle cx="75" cy="85" r="4" fill="#3d2314" />
+                        <circle cx="125" cy="85" r="4" fill="#3d2314" />
+                        <!-- Sobrancelhas -->
+                        <path d="M 60 72 Q 75 66 90 74" fill="none" stroke="#3d2314" stroke-width="3" stroke-linecap="round"/>
+                        <path d="M 110 74 Q 125 66 140 72" fill="none" stroke="#3d2314" stroke-width="3" stroke-linecap="round"/>
+                        <!-- Nariz -->
+                        <path d="M 100 90 L 96 115 L 104 115" fill="none" stroke="#d4a373" stroke-width="2" />
+                        <!-- Bochechas (Blush) -->
+                        <circle id="blush-left" cx="65" cy="120" r="16" fill="#ff2b85" opacity="0.3" />
+                        <circle id="blush-right" cx="135" cy="120" r="16" fill="#ff2b85" opacity="0.3" />
+                        <!-- Lábios (Batom) -->
+                        <path id="lip-shape" d="M 80 145 Q 100 138 120 145 Q 100 165 80 145 Z" fill="#ff2b85" stroke="#d8005f" stroke-width="1.5"/>
+                    </svg>
+                    <p style="margin-top:16px; color:var(--text-sub);">Pré-visualização do seu Look</p>
+                </div>
+
+                <div class="controls-group">
+                    <div>
+                        <span class="color-picker-title">💄 Escolha a Cor do Batom:</span>
+                        <div class="color-palette">
+                            <div class="color-dot selected" style="background:#ff2b85;" onclick="changeLipColor('#ff2b85', this)"></div>
+                            <div class="color-dot" style="background:#d8005f;" onclick="changeLipColor('#d8005f', this)"></div>
+                            <div class="color-dot" style="background:#800020;" onclick="changeLipColor('#800020', this)"></div>
+                            <div class="color-dot" style="background:#ff69b4;" onclick="changeLipColor('#ff69b4', this)"></div>
+                            <div class="color-dot" style="background:#ff4500;" onclick="changeLipColor('#ff4500', this)"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <span class="color-picker-title">🌸 Tom do Blush:</span>
+                        <div class="color-palette">
+                            <div class="color-dot selected" style="background:#ff2b85;" onclick="changeBlushColor('#ff2b85', this)"></div>
+                            <div class="color-dot" style="background:#ffb6c1;" onclick="changeBlushColor('#ffb6c1', this)"></div>
+                            <div class="color-dot" style="background:#cd5c5c;" onclick="changeBlushColor('#cd5c5c', this)"></div>
+                        </div>
+                    </div>
+
+                    <button class="btn-touch" style="margin-top: 20px;" onclick="addToCart('Kit Deste Look Pejo', 89.90)">
+                        ✨ Comprar Kit Deste Look (R$ 89,90)
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: AGENDAMENTO -->
+        <section id="tab-booking" class="tab-section">
+            <div class="pink-banner">
+                <div>
+                    <h1>Agendamento VIP & Cursos</h1>
+                    <p>Reserve seu horário de maquiagem social ou faça sua inscrição na Masterclass Pejo Pink!</p>
+                </div>
+            </div>
+
+            <form class="booking-form" onsubmit="event.preventDefault(); alert('Agendamento confirmado com sucesso!');">
+                <div class="form-group">
+                    <label>Seu Nome Completo:</label>
+                    <input type="text" class="form-input" placeholder="Digite seu nome..." required>
+                </div>
+
+                <div class="form-group">
+                    <label>Escolha o Serviço:</label>
+                    <select class="form-input" required>
+                        <option value="social">Maquiagem Social VIP - R$ 150,00</option>
+                        <option value="noiva">Make Noiva & Festas - R$ 350,00</option>
+                        <option value="curso">Masterclass de Automake - R$ 250,00</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Data Preferida:</label>
+                    <input type="date" class="form-input" required>
+                </div>
+
+                <button type="submit" class="btn-touch">
+                    📅 Confirmar Agendamento
+                </button>
+            </form>
+        </section>
+    </main>
+
+    <!-- Floating Cart Button -->
+    <button class="btn-touch cart-btn-fixed" onclick="toggleCartModal()">
+        🛒 Carrinho <span class="badge" id="cart-count">0</span>
+    </button>
+
+    <!-- Modal do Carrinho -->
+    <div class="modal-overlay" id="cart-modal">
+        <div class="modal-content">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+                <h2 style="font-size:1.6rem; color:#fff;">🛍️ Seu Carrinho Pejo Pink</h2>
+                <button class="btn-touch btn-outline" style="min-height:40px; padding:0 16px;" onclick="toggleCartModal()">✕ Fechar</button>
+            </div>
+
+            <div id="cart-items-list">
+                <p style="color:var(--text-sub); text-align:center; padding:20px;">Seu carrinho está vazio.</p>
+            </div>
+
+            <div style="margin-top:20px; border-top:1px solid rgba(255,255,255,0.1); padding-top:20px;">
+                <div style="display:flex; justify-content:space-between; font-size:1.4rem; font-weight:800; margin-bottom:20px;">
+                    <span>Total:</span>
+                    <span id="cart-total" style="color:var(--pink-main);">R$ 0,00</span>
+                </div>
+                <button class="btn-touch" style="width:100%;" onclick="alert('Pedido finalizado com sucesso!'); cart=[]; updateCartUI(); toggleCartModal();">
+                    ✅ Finalizar Compra
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Store State
+        let cart = [];
+
+        // Tab Switcher
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-section').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.nav-tab-btn').forEach(el => el.classList.remove('active'));
+
+            document.getElementById('tab-' + tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        // Adjust Button Sizes dynamically
+        function setTouchSize(size) {
+            document.body.setAttribute('data-touch-size', size);
+            document.querySelectorAll('.size-btn').forEach(btn => btn.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+        }
+
+        // Cart Actions
+        function addToCart(title, price) {
+            cart.push({ title, price });
+            updateCartUI();
+            
+            // Visual feedback
+            const btn = event.currentTarget;
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '✅ Adicionado!';
+            btn.style.background = '#28a745';
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.style.background = '';
+            }, 1000);
+        }
+
+        function updateCartUI() {
+            document.getElementById('cart-count').innerText = cart.length;
+            const listEl = document.getElementById('cart-items-list');
+            
+            if (cart.length === 0) {
+                listEl.innerHTML = '<p style="color:var(--text-sub); text-align:center; padding:20px;">Seu carrinho está vazio.</p>';
+                document.getElementById('cart-total').innerText = 'R$ 0,00';
+                return;
+            }
+
+            let html = '';
+            let total = 0;
+            cart.forEach((item, index) => {
+                total += item.price;
+                html += `
+                    <div class="cart-item">
+                        <div>
+                            <strong style="color:#fff;">${item.title}</strong>
+                            <div style="color:var(--pink-main); font-weight:700;">R$ ${item.price.toFixed(2)}</div>
+                        </div>
+                        <button class="btn-touch btn-outline" style="min-height:40px; padding:0 12px;" onclick="removeFromCart(${index})">🗑️ Excluir</button>
+                    </div>
+                `;
+            });
+
+            listEl.innerHTML = html;
+            document.getElementById('cart-total').innerText = 'R$ ' + total.toFixed(2);
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function toggleCartModal() {
+            const modal = document.getElementById('cart-modal');
+            modal.classList.toggle('active');
+        }
+
+        // Tryon Controls
+        function changeLipColor(color, el) {
+            document.getElementById('lip-shape').setAttribute('fill', color);
+            el.parentElement.querySelectorAll('.color-dot').forEach(d => d.classList.remove('selected'));
+            el.classList.add('selected');
+        }
+
+        function changeBlushColor(color, el) {
+            document.getElementById('blush-left').setAttribute('fill', color);
+            document.getElementById('blush-right').setAttribute('fill', color);
+            el.parentElement.querySelectorAll('.color-dot').forEach(d => d.classList.remove('selected'));
+            el.classList.add('selected');
+        }
+    </script>
+</body>
+</html>
